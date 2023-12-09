@@ -1,3 +1,4 @@
+import ListRating from "@/components/Products/ListRating";
 import ProductDetails from "@/components/Products/ProductDetails";
 import React from "react";
 
@@ -79,6 +80,12 @@ const productDetailsPage = ({ params }) => {
   return (
     <div className="p-8">
       <ProductDetails product={details} />
+      <div className="flex flex-col mt-20 gap-4">
+        <div>Add Rating</div>
+        <div>
+          <ListRating products={details} />
+        </div>
+      </div>
     </div>
   );
 };
