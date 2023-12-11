@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Redressed } from "next/font/google";
+import CardCount from "./CardCount";
 
 const redressed = Redressed({ subsets: ["latin"], weight: ["400"] });
 
@@ -16,8 +17,12 @@ const Navbar = () => {
           </Link>
           <div className="hidden lg:block">Search</div>
           <div className="flex items-center gap-8 md:gap-12">
-            <div>Card Count</div>
-            <div>User Logo</div>
+            <div>
+              <CardCount />
+            </div>
+            <Link href="/register">
+              <div>User Logo</div>
+            </Link>
           </div>
         </div>
       </div>

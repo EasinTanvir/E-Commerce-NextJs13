@@ -10,7 +10,7 @@ import { IoMdCheckmarkCircle } from "react-icons/io";
 const ProductDetails = ({ product }) => {
   const { cartProduct, hadleAddProductCart } = useCart();
   const [isProductExist, setIsProductExist] = useState(false);
-  console.log(cartProduct);
+
   const { id, name, desccription, category, brand, images, price } = product;
   const [cardProduct, setCardProduct] = useState({
     id,
@@ -92,10 +92,10 @@ const ProductDetails = ({ product }) => {
           <span className="font-semibold">Brand :</span> {product.brand}
         </div>{" "}
         <div
-          className={`${product.instock ? "text-teal-400" : "text-rose-400"}`}
+          className={`${product.inStock ? "text-teal-400" : "text-rose-400"}`}
         >
           {" "}
-          {product.instock ? "In Stock" : "Out of Stock"}
+          {product.inStock ? "In Stock" : "Out of Stock"}
         </div>
         <Horizontal />
         {isProductExist ? (

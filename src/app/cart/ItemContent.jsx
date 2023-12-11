@@ -3,8 +3,11 @@ import { truncateText } from "@/utils/truncateText";
 import Link from "next/link";
 import Image from "next/image";
 import SetQuantity from "@/components/Products/SetQuantity";
+import { useCart } from "../../../hooks/useCart";
 
 const ItemContent = ({ item }) => {
+  const { removeItemFromCart, handleQtyIncrease, handleQtyDecrease } =
+    useCart();
   return (
     <div className="grid grid-cols-5 md:text-md text-sm gap-4 border-t-[1.5px] py-4 items-center border-slate-300">
       <div className="col-span-2 justify-self-start flex sm:flex-row flex-col gap-2 md:gap-4">
@@ -22,7 +25,10 @@ const ItemContent = ({ item }) => {
           <Link href={`/product/${item.id}`}>{truncateText(item.name)}</Link>
           <div>{item.selectedImage.color}</div>
           <div className="w-[70px]">
-            <button className="bg-red-700 text-xs text-white  py-1 px-2 rounded-sm hover:text-gray-400  mt-2">
+            <button
+              onClick={() => removeItemFromCart(item)}
+              className="bg-red-700 text-xs text-white  py-1 px-2 rounded-sm hover:text-gray-400  mt-2"
+            >
               Remove
             </button>
           </div>
@@ -33,8 +39,8 @@ const ItemContent = ({ item }) => {
         <SetQuantity
           cardProduct={item}
           cardCounter={true}
-          handleQtyIncrease={() => {}}
-          handleQtyDecrease={() => {}}
+          handleQtyIncrease={() => handleQtyIncrease(item)}
+          handleQtyDecrease={() => handleQtyDecrease(item)}
         />
       </div>
       <div className="justify-self-end">
