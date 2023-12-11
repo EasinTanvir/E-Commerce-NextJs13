@@ -1,6 +1,14 @@
 "use client";
 
-const AddButton = () => {
+const AddButton = ({
+  label,
+  disabled,
+  outline,
+  small,
+  custom,
+  icon,
+  onClick,
+}) => {
   return <div>AddButton</div>;
 };
 

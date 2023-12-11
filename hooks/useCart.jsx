@@ -1,5 +1,5 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
-
+import toast, { Toaster } from "react-hot-toast";
 const CartContext = React.createContext();
 
 export const CardContextProvider = ({ children }) => {
@@ -20,10 +20,17 @@ export const CardContextProvider = ({ children }) => {
 
       if (prevData) {
         updatedCart = [...prevData, product];
-        localStorage.setItem("cartData", JSON.stringify(updatedCart));
       } else {
         updatedCart = [product];
       }
+      localStorage.setItem("cartData", JSON.stringify(updatedCart));
+      toast.success("Product added to cart", {
+        position: "bottom-center",
+        style: {
+          color: "#fff",
+          background: "rgb(51 65 85)",
+        },
+      });
 
       return updatedCart;
     });

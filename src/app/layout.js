@@ -2,7 +2,7 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
-
+import toast, { Toaster } from "react-hot-toast";
 import CartProvider from "../../provider/CartProvider";
 
 const poppins = Poppins({
@@ -20,6 +20,12 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`${poppins.className} `}>
         <div className="flex flex-col min-h-screen">
+          {" "}
+          <Toaster
+            containerStyle={{
+              color: "#fff",
+            }}
+          />
           <CartProvider>
             <Navbar />
             <main className="flex-grow">{children}</main>
