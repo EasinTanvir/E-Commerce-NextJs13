@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 
-import { prisma } from "../../../../libs/PrismaConfig";
+import { prisma } from "../../../../libs/prismaConfig";
 export async function POST(req) {
   const { name, email, password } = await req.json();
 
@@ -39,5 +39,8 @@ export async function POST(req) {
     );
   }
 
-  return NextResponse.json({ user }, { status: 201 });
+  return NextResponse.json(
+    { user, message: "Account Create successful" },
+    { status: 201 }
+  );
 }

@@ -3,9 +3,14 @@ import Heading from "@/components/Heading";
 import Inputs from "@/components/inputs/Inputs";
 import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
+import axios from "axios";
 import Link from "next/link";
 import { AiOutlineGoogle } from "react-icons/ai";
+import { signIn } from "next-auth/react";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 const RegisterForm = () => {
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const {
     register,
@@ -13,8 +18,33 @@ const RegisterForm = () => {
     formState: { errors },
   } = useForm({ name: "", email: "", password: "" });
 
-  const onSubmithandler = (data) => {
-    console.log(data);
+  const onSubmithandler = async (datas) => {
+    setIsLoading(true);
+    try {
+      const { data } = await axios.post("/api/register", datas);
+      console.log(data);
+      if (data.message) {
+        toast.success(data.message);
+      }
+      signIn("credentials", {
+        email: datas.email,
+        password: datas.password,
+        redirect: false,
+      }).then((cb) => {
+        if (cb?.ok) {
+          router.push("/");
+          router.refresh();
+          toast.success("Login Success");
+        }
+        if (cb?.error) {
+          toast.error(cb.error);
+        }
+      });
+    } catch (err) {
+      toast.error(err.response.data.message);
+    } finally {
+      setIsLoading(false);
+    }
   };
   return (
     <>
@@ -58,7 +88,7 @@ const RegisterForm = () => {
           onClick={handleSubmit(onSubmithandler)}
           className="bg-red-700 py-2 px-4 rounded-md border-none text-white font-semibold hover:text-gray-400 hover:scale-105 transition duration-200 "
         >
-          Register
+          {isLoading ? "Loading" : "Register"}
         </button>
       </div>{" "}
       <div className=" w-full">

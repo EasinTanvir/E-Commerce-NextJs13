@@ -4,16 +4,16 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 
 import CredentialsProvider from "next-auth/providers/credentials";
 
-import bcrypt from "bcrypt";
-import { prisma } from "../../../libs/PrismaConfig";
+import bcrypt from "bcryptjs";
+import { prisma } from "../../../libs/prismaConfig";
 
 export default NextAuth({
   adapter: PrismaAdapter(prisma),
   providers: [
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    }),
+    // GoogleProvider({
+    //   clientId: process.env.GOOGLE_CLIENT_ID,
+    //   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    // }),
     CredentialsProvider({
       name: "Credentials",
 
@@ -39,7 +39,7 @@ export default NextAuth({
 
         const checkPass = await bcrypt.compare(
           credentials.password,
-          user.password
+          user.hashPassword
         );
         if (!checkPass) {
           throw new Error("Invalid password");

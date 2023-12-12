@@ -132,7 +132,7 @@ export const CardContextProvider = ({ children }) => {
   const clearCart = () => {
     setCartProduct([]);
     setCartTotalQty(0);
-    localStorage.removeItem("cartData");
+    localStorage.setItem("cartData", JSON.stringify([]));
   };
 
   const sendData = {

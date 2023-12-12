@@ -6,7 +6,11 @@ import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import Link from "next/link";
 import { AiOutlineGoogle } from "react-icons/ai";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
+import { signIn } from "next-auth/react";
 const LoginForm = () => {
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const {
     register,
@@ -14,8 +18,25 @@ const LoginForm = () => {
     formState: { errors },
   } = useForm({ email: "", password: "" });
 
-  const onSubmithandler = (data) => {
-    console.log(data);
+  const onSubmithandler = async (datas) => {
+    setIsLoading(true);
+
+    signIn("credentials", {
+      email: datas.email,
+      password: datas.password,
+      redirect: false,
+    }).then((cb) => {
+      if (cb?.ok) {
+        router.push("/");
+        setIsLoading(false);
+        router.refresh();
+        toast.success("Login Success");
+      }
+      if (cb?.error) {
+        toast.error(cb.error);
+        setIsLoading(false);
+      }
+    });
   };
   return (
     <>
@@ -50,12 +71,12 @@ const LoginForm = () => {
           onClick={handleSubmit(onSubmithandler)}
           className="bg-red-700 py-2 px-4 rounded-md border-none text-white font-semibold hover:text-gray-400 hover:scale-105 transition duration-200 "
         >
-          Login
+          {isLoading ? "Loading" : "Login"}
         </button>
-      </div>{" "}
-      <div className=" w-full">
+      </div>
+      <div className="w-full">
         <p className="text-sm text-slate-600">
-          Don't have an account?{" "}
+          Don't have an account?
           <Link className="underline font-semibold" href="/register">
             Register
           </Link>

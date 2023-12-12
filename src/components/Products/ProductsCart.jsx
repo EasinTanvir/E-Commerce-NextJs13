@@ -21,6 +21,7 @@ const ProductCart = ({ data }) => {
       <div className="flex flex-col items-center w-full gap-1">
         <div className="aspect-square relative overflow-hidden w-full">
           <Image
+            alt="banner"
             src={data.images[0].image}
             fill
             className="object-contain w-full h-full"

@@ -15,12 +15,18 @@ const ProductImage = ({ cardProduct, product, handleColorSet }) => {
                 : "border-none"
             }`}
           >
-            <Image src={item.image} fill className="object-contain" />
+            <Image
+              alt="banner"
+              src={item.image}
+              fill
+              className="object-contain"
+            />
           </div>
         ))}
       </div>
       <div className="col-span-5 relative aspect-square">
         <Image
+          alt="banner"
           fill
           src={cardProduct.selectedImage.image}
           className="w-full h-full max-h-[500px] min-h-[300px] sm:min-h-[400px] object-contain"

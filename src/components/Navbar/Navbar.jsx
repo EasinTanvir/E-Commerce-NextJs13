@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Redressed } from "next/font/google";
 import CardCount from "./CardCount";
+import UserMenu from "./UserMenu";
 
 const redressed = Redressed({ subsets: ["latin"], weight: ["400"] });
 
@@ -20,9 +21,10 @@ const Navbar = () => {
             <div>
               <CardCount />
             </div>
-            <Link href="/register">
-              <div>User Logo</div>
-            </Link>
+
+            <div>
+              <UserMenu />
+            </div>
           </div>
         </div>
       </div>
