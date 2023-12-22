@@ -24,7 +24,7 @@ const UserMenu = ({ currentUser }) => {
         onClick={handleClick}
         className="border-[1px] border-slate-400 flex flex-row items-center gap-1 rounded-full cursor-pointer hover:shadow-md transition text-slate-700"
       >
-        <Avatar />
+        <Avatar alt={currentUser?.name} src={currentUser?.image} />
       </div>
       <Menu
         sx={{ width: "400px" }}

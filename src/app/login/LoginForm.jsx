@@ -2,14 +2,15 @@
 "use client";
 import Heading from "@/components/Heading";
 import Inputs from "@/components/inputs/Inputs";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import Link from "next/link";
 import { AiOutlineGoogle } from "react-icons/ai";
+import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
-import { signIn } from "next-auth/react";
-const LoginForm = () => {
+
+const LoginForm = ({ currentUser }) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const {
@@ -38,12 +39,26 @@ const LoginForm = () => {
       }
     });
   };
+
+  useEffect(() => {
+    if (currentUser) {
+      router.push("/");
+      router.refresh();
+    }
+  }, [currentUser]);
+
+  if (currentUser) {
+    return <p>Logged In Redirecting....</p>;
+  }
   return (
     <>
       <Heading title="Login Here" />
       <hr className="bg-slate-300 w-full h-px" />
       <div className="w-full">
-        <button className="bg-teal-950 w-full flex items-center gap-2 justify-center text-white py-3 rounded-md ">
+        <button
+          onClick={() => signIn("google")}
+          className="bg-teal-950 w-full flex items-center gap-2 justify-center text-white py-3 rounded-md "
+        >
           <span>Continue with google</span>
           <AiOutlineGoogle />
         </button>
