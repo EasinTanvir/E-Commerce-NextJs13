@@ -2,10 +2,12 @@ import Link from "next/link";
 import { Redressed } from "next/font/google";
 import CardCount from "./CardCount";
 import UserMenu from "./UserMenu";
+import { getCurrentuser } from "../../../getUser/currentUser";
 
 const redressed = Redressed({ subsets: ["latin"], weight: ["400"] });
 
-const Navbar = () => {
+const Navbar = async () => {
+  const currentUser = await getCurrentuser();
   return (
     <div className="w-full sticky top-0 shadow-sm bg-slate-300 z-30">
       <div className="container mx-auto px-4 sm:px-0 py-4 border-b-[1px] ">
@@ -23,7 +25,7 @@ const Navbar = () => {
             </div>
 
             <div>
-              <UserMenu />
+              <UserMenu currentUser={currentUser} />
             </div>
           </div>
         </div>

@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
 import toast, { Toaster } from "react-hot-toast";
 import CartProvider from "../../provider/CartProvider";
+import { getCurrentuser } from "../../getUser/currentUser";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -15,15 +16,15 @@ export const metadata = {
   description: "easintanvir",
 };
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  const currentUser = await getCurrentuser();
+  console.log("user>>  ", currentUser);
   return (
     <html lang="en">
       <body className={`${poppins.className} `}>
         <div className="flex flex-col min-h-screen">
           {" "}
-          <Toaster
-            
-          />
+          <Toaster />
           <CartProvider>
             <Navbar />
             <main className="flex-grow">{children}</main>
