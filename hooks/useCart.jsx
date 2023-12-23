@@ -6,11 +6,18 @@ export const CardContextProvider = ({ children }) => {
   const [cartTotalQty, setCartTotalQty] = useState(0);
   const [cartTotalPrice, setCartTotalPrice] = useState(0);
   const [cartProduct, setCartProduct] = useState([]);
-
+  const [paymentIntent, setPaymentIntent] = useState(null);
+  console.log("t----", cartTotalPrice);
   useEffect(() => {
     const cartItems = localStorage.getItem("cartData")
       ? JSON.parse(localStorage.getItem("cartData"))
       : [];
+
+    const payment = localStorage.getItem("paymentIntent")
+      ? JSON.parse(localStorage.getItem("paymentIntent"))
+      : null;
+
+    setPaymentIntent(payment);
 
     setCartProduct(cartItems);
   }, []);
@@ -135,6 +142,14 @@ export const CardContextProvider = ({ children }) => {
     localStorage.setItem("cartData", JSON.stringify([]));
   };
 
+  const handlePaymentIntent = useCallback(
+    (value) => {
+      setPaymentIntent(value);
+      localStorage.setItem("paymentIntent", JSON.stringify(value));
+    },
+    [paymentIntent]
+  );
+
   const sendData = {
     cartTotalQty,
     cartProduct,
@@ -142,9 +157,11 @@ export const CardContextProvider = ({ children }) => {
     removeItemFromCart,
     handleQtyIncrease,
     handleQtyDecrease,
+    handlePaymentIntent,
     clearCart,
     cartTotalPrice,
     cartTotalQty,
+    paymentIntent,
   };
 
   return (
