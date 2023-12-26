@@ -25,7 +25,7 @@ const ProductDetails = ({ product }) => {
 
   useEffect(() => {
     setIsProductExist(false);
-    const findIndex = cartProduct.findIndex((item) => item.id === product.id);
+    const findIndex = cartProduct?.findIndex((item) => item.id === product.id);
     if (findIndex > -1) {
       setIsProductExist(true);
     }

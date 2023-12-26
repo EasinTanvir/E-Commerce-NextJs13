@@ -5,12 +5,14 @@ import Link from "next/link";
 import { MdArrowBack } from "react-icons/md";
 import ItemContent from "./ItemContent";
 import { formatPrice } from "@/utils/formatPrice";
+import { useRouter } from "next/navigation";
 
-const CartClient = () => {
+const CartClient = ({ currentUser }) => {
+  const router = useRouter();
   const { cartProduct, clearCart, cartTotalPrice, cartTotalQty } = useCart();
   if (!cartProduct || cartProduct.length === 0) {
     return (
-      <div className="flex flex-col items-center">
+      <div className="min-h-[440px] flex flex-col items-center">
         <div className="text-2xl">cart is empty</div>
         <div>
           <Link
@@ -24,6 +26,13 @@ const CartClient = () => {
       </div>
     );
   }
+  const onLoginHander = () => {
+    if (currentUser) {
+      router.push("/checkout");
+    } else {
+      router.push("/login");
+    }
+  };
   return (
     <div>
       <Heading title="Shopping cart" center />
@@ -54,8 +63,11 @@ const CartClient = () => {
           <p className="text-slate-500">
             Taxes and shipping calculate at checkout
           </p>
-          <button className="font-semibold  py-2 px-4 rounded-sm bg-teal-600 text-white hover:text-gray-300 hover:scale-105 transition duration-500">
-            Checkout
+          <button
+            onClick={onLoginHander}
+            className="font-semibold  py-2 px-4 rounded-sm bg-teal-600 text-white hover:text-gray-300 hover:scale-105 transition duration-500"
+          >
+            {currentUser ? "Checkout" : "Login To Checkout"}
           </button>
           <Link
             href="/"

@@ -18,7 +18,7 @@ export const metadata = {
 
 export default async function RootLayout({ children }) {
   const currentUser = await getCurrentuser();
-  console.log("user>>  ", currentUser);
+
   return (
     <html lang="en">
       <body className={`${poppins.className} `}>

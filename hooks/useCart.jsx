@@ -5,13 +5,13 @@ const CartContext = React.createContext();
 export const CardContextProvider = ({ children }) => {
   const [cartTotalQty, setCartTotalQty] = useState(0);
   const [cartTotalPrice, setCartTotalPrice] = useState(0);
-  const [cartProduct, setCartProduct] = useState([]);
+  const [cartProduct, setCartProduct] = useState(null);
   const [paymentIntent, setPaymentIntent] = useState(null);
-  console.log("t----", cartTotalPrice);
+
   useEffect(() => {
     const cartItems = localStorage.getItem("cartData")
       ? JSON.parse(localStorage.getItem("cartData"))
-      : [];
+      : null;
 
     const payment = localStorage.getItem("paymentIntent")
       ? JSON.parse(localStorage.getItem("paymentIntent"))
@@ -23,7 +23,7 @@ export const CardContextProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    if (cartProduct.length === 0) return;
+    if (!cartProduct) return;
 
     const getPrice = () => {
       const { total, qty } = cartProduct.reduce(
@@ -98,7 +98,7 @@ export const CardContextProvider = ({ children }) => {
         return toast.error("Opps! Maximum amount reached");
       }
       updateProduct = [...cartProduct];
-      const existingProduct = cartProduct.findIndex(
+      const existingProduct = cartProduct?.findIndex(
         (item) => item.id === product.id
       );
 
@@ -139,6 +139,7 @@ export const CardContextProvider = ({ children }) => {
   const clearCart = () => {
     setCartProduct([]);
     setCartTotalQty(0);
+
     localStorage.setItem("cartData", JSON.stringify([]));
   };
 

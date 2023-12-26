@@ -4,6 +4,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { getCurrentuser } from "../../../../getUser/currentUser";
 
 export async function POST(req) {
+  const { items, payment_intent_id } = await req.json();
+
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
     apiVersion: "2023-10-16",
   });
@@ -13,19 +15,18 @@ export async function POST(req) {
       return acc + itemTotal;
     }, 0);
 
-    return totalPrice * 100;
+    return Math.floor(totalPrice) * 100;
   };
 
   const currenUser = await getCurrentuser();
 
   if (!currenUser) {
-    return NextResponse.json({ message: "unauthorized" }, { status: 401 });
+    return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
   }
 
-  const { items, payment_intent_id } = await req.json();
   const total = calculateOrderPrice(items);
 
-  console.log(total);
+  console.log("payment_intent_id = ", payment_intent_id);
 
   const orderData = {
     user: { connect: { id: currenUser.id } },
@@ -38,7 +39,6 @@ export async function POST(req) {
   };
 
   if (payment_intent_id) {
-    console.log("i am onsss");
     //update
     const current_intent = await stripe.paymentIntents.retrieve(
       payment_intent_id
@@ -56,7 +56,7 @@ export async function POST(req) {
       prisma.order.findFirst({ where: { paymentIntentId: payment_intent_id } }),
       prisma.order.update({
         where: { paymentIntentId: payment_intent_id },
-        data: { amount: total, products: items },
+        data: { amount: total / 100, products: items },
       }),
     ]);
 
@@ -72,7 +72,6 @@ export async function POST(req) {
       { status: 201 }
     );
   } else {
-    console.log("i am on");
     const paymentIntent = await stripe.paymentIntents.create({
       amount: total,
       currency: "usd",
@@ -80,7 +79,7 @@ export async function POST(req) {
     });
 
     orderData.paymentIntentId = paymentIntent.id;
-    await prisma.order.create({ data: orderData });
+    await prisma.order.create({ data: { ...orderData, amount: total / 100 } });
 
     return NextResponse.json({ paymentIntent }, { status: 201 });
   }
