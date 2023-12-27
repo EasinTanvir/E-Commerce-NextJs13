@@ -1,6 +1,6 @@
 import React from "react";
 import CheckOutClient from "./CheckOutClient";
-import FormWrapp from "@/components/FormWrapp";
+import FormWrapp from "../../components/FormWrapp";
 
 const page = () => {
   return (

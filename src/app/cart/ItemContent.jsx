@@ -1,8 +1,8 @@
-import { formatPrice } from "@/utils/formatPrice";
-import { truncateText } from "@/utils/truncateText";
+import { formatPrice } from "../../utils/formatPrice";
+import { truncateText } from "../../utils/truncateText";
 import Link from "next/link";
 import Image from "next/image";
-import SetQuantity from "@/components/Products/SetQuantity";
+import SetQuantity from "../../components/Products/SetQuantity";
 import { useCart } from "../../../hooks/useCart";
 
 const ItemContent = ({ item }) => {

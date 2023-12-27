@@ -1,10 +1,10 @@
 "use client";
-import Heading from "@/components/Heading";
+import Heading from "../../components/Heading";
 import { useCart } from "../../../hooks/useCart";
 import Link from "next/link";
 import { MdArrowBack } from "react-icons/md";
 import ItemContent from "./ItemContent";
-import { formatPrice } from "@/utils/formatPrice";
+import { formatPrice } from "../../utils/formatPrice";
 import { useRouter } from "next/navigation";
 
 const CartClient = ({ currentUser }) => {

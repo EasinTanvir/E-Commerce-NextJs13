@@ -1,7 +1,7 @@
-import ListRating from "@/components/Products/ListRating";
-import ProductDetails from "@/components/Products/ProductDetails";
+import ProductDetails from "../../../components/Products/ProductDetails";
 import React from "react";
-import { products } from "@/utils/products";
+import { products } from "../../../utils/products";
+import ListRating from "../../../components/Products/ListRating";
 
 const productDetailsPage = ({ params }) => {
   const productId = params.pid;

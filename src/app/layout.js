@@ -1,10 +1,11 @@
 import { Poppins } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar/Navbar";
-import Footer from "@/components/Footer/Footer";
+
+import Footer from "../components/Footer/Footer";
 import toast, { Toaster } from "react-hot-toast";
 import CartProvider from "../../provider/CartProvider";
 import { getCurrentuser } from "../../getUser/currentUser";
+import Navbar from "../components/Navbar/Navbar";
 
 const poppins = Poppins({
   subsets: ["latin"],

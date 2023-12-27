@@ -1,7 +1,7 @@
 "use client";
 "use client";
-import Heading from "@/components/Heading";
-import Inputs from "@/components/inputs/Inputs";
+import Heading from "../../components/Heading";
+import Inputs from "../../components/inputs/Inputs";
 import React, { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import Link from "next/link";

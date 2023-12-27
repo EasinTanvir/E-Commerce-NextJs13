@@ -1,17 +1,14 @@
 import React from "react";
 
-const Inputs = ({ id, label, type, disabled, register, errors, required }) => {
+const TextAreas = ({ id, label, disabled, register, errors, required }) => {
   return (
     <div className="w-full relative">
-      <input
-        autoComplete="off"
+      <textarea
         disabled={disabled}
         {...register(id, { required })}
-        className={`peer w-full px-4 py-3 pt-5 outline-none bg-white font-light rounded-md border-2  transition disabled:opacity-70 disabled:cursor-not-allowed ${
+        className={`peer max-h-[150px] min-h-[150px] w-full px-4 py-3 pt-5 outline-none bg-white font-light rounded-md border-2  transition disabled:opacity-70 disabled:cursor-not-allowed ${
           errors[id] ? "border-rose-400" : "border-slate-300"
         } ${errors[id] ? "focus:border-rose-400" : "focus:border-slate-300"}`}
-        type={type}
-        {...(type === "number" ? { min: 0 } : {})}
         id={id}
       />
       <label
@@ -29,4 +26,4 @@ const Inputs = ({ id, label, type, disabled, register, errors, required }) => {
   );
 };
 
-export default Inputs;
+export default TextAreas;

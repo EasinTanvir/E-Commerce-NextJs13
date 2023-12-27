@@ -1,9 +1,10 @@
 "use client";
 import Image from "next/image";
-import { truncateText } from "@/utils/truncateText";
-import { formatPrice } from "@/utils/formatPrice";
+
 import { Rating } from "@mui/material";
 import { useRouter } from "next/navigation";
+import { truncateText } from "../../utils/truncateText";
+import { formatPrice } from "../../utils/formatPrice";
 
 const ProductCart = ({ data }) => {
   const navigate = useRouter();

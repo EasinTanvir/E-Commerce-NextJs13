@@ -1,30 +1,98 @@
-import React from "react";
+"use client";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, EffectCube, Autoplay } from "swiper/modules";
 import Image from "next/image";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/scrollbar";
+import "swiper/css/effect-cube";
 
 const HomeBanner = () => {
   return (
-    <div className="relative bg-gradient-to-r from-sky-500 to-sky-700 mb-8 rounded-sm">
-      <div className="mx-auto px-8 py-12 flex flex-col md:flex-row items-center gap-2 justify-evenly">
-        <div className="text-center mb-8 md:mb-0 ">
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">
-            Summer Sale
-          </h1>
-          <p className="text-lg md:text-xl text-white mb-5">
-            Enjoy Discount on selecting items
-          </p>
-          <p className="text-2xl md:text-5xl text-yellow-400 font-extrabold">
-            GET 50% OFF
-          </p>
-        </div>
-        <div className="w-1/3 relative aspect-video ">
-          <Image
-            fill
-            alt="banner"
-            src="/assets/banner-image.png"
-            className="object-contain"
-          />
-        </div>
-      </div>
+    <div className=" py-2 rounded-md">
+      <Swiper
+        effect={"cube"}
+        grabCursor={true}
+        cubeEffect={{
+          shadow: true,
+          slideShadows: true,
+          shadowOffset: 20,
+          shadowScale: 0.94,
+        }}
+        autoplay={{
+          delay: 4000,
+          disableOnInteraction: false,
+        }}
+        navigation
+        modules={[Pagination, EffectCube, Autoplay, Navigation]}
+        pagination={{ clickable: true }}
+        scrollbar={{ draggable: true }}
+        slidesPerView={1}
+      >
+        <SwiperSlide>
+          <div className="image-banner rounded-md relative">
+            <div className="absolute top-10 left-20">
+              <h1 style={{ color: "red" }} className="font-extrabold text-5xl ">
+                Summar Sale
+              </h1>
+              <button className="bg-teal-600 text-white rounded-md px-8 py-2 mt-4 font-semibold hover:scale-105 transition duration-200 hover:text-gray-300">
+                Buy Now
+              </button>
+            </div>
+            <img
+              alt="banner"
+              src="/assets/4.jpg"
+              className="object-fill w-full h-full rounded-xl shadow-xl"
+            />
+          </div>
+        </SwiperSlide>
+        <SwiperSlide>
+          <div className="image-banner rounded-md">
+            <img
+              alt="banner"
+              src="/assets/2.jpg"
+              className="object-cover w-full h-full rounded-xl shadow-xl"
+            />
+          </div>
+        </SwiperSlide>
+        <SwiperSlide>
+          <div className="image-banner rounded-md">
+            <img
+              alt="banner"
+              src="/assets/5.jpg"
+              className="object-cover w-full h-full rounded-xl shadow-xl"
+            />
+          </div>
+        </SwiperSlide>{" "}
+        <SwiperSlide>
+          <div className="image-banner rounded-md">
+            <img
+              alt="banner"
+              src="/assets/3.jpg"
+              className="object-cover w-full h-full rounded-xl shadow-xl"
+            />
+          </div>
+        </SwiperSlide>{" "}
+        <SwiperSlide>
+          <div className="image-banner rounded-md">
+            <img
+              alt="banner"
+              src="/assets/2.jpg"
+              className="object-cover w-full h-full rounded-xl shadow-xl"
+            />
+          </div>
+        </SwiperSlide>{" "}
+        <SwiperSlide>
+          <div className="image-banner rounded-md">
+            <img
+              alt="banner"
+              src="/assets/6.jpg"
+              className="object-cover w-full h-full rounded-xl shadow-xl"
+            />
+          </div>
+        </SwiperSlide>
+      </Swiper>
     </div>
   );
 };

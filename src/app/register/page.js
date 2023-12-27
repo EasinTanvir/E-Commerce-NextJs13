@@ -1,4 +1,4 @@
-import FormWrapp from "@/components/FormWrapp";
+import FormWrapp from "../../components/FormWrapp";
 import React from "react";
 import RegisterForm from "./RegisterForm";
 import { getCurrentuser } from "../../../getUser/currentUser";

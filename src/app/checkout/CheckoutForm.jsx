@@ -1,5 +1,6 @@
 "use client";
-import { formatPrice } from "@/utils/formatPrice";
+import { formatPrice } from "../../utils/formatPrice";
+
 import { useCart } from "../../../hooks/useCart";
 import toast, { Toaster } from "react-hot-toast";
 import {
