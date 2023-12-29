@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import Heading from "../../../components/Heading";
 import Inputs from "../../../components/inputs/Inputs";
+import axios from "axios";
 import TextAreas from "../../../components/inputs/TextArea";
 import {
   getStorage,
@@ -17,11 +18,13 @@ import CategorieInput from "../../../components/CategorieInput";
 import { productColors } from "../../../utils/productColor";
 import SelectColors from "@/components/SelectColors";
 import firebaseApp from "../../../../libs/firebase-config";
+import { useRouter } from "next/navigation";
 const AddProductForm = () => {
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [images, setImages] = useState("");
   const [isProductCreated, setIsProductCreated] = useState(false);
-  console.log("image ", images);
+
   const {
     register,
     handleSubmit,
@@ -130,9 +133,9 @@ const AddProductForm = () => {
                     .then((downloadURL) => {
                       uploadedImages.push({
                         ...items,
-                        images: downloadURL,
+                        image: downloadURL,
                       });
-                      setIsLoading(false);
+
                       console.log("File available at", downloadURL);
                       resolve();
                     })
@@ -155,7 +158,27 @@ const AddProductForm = () => {
     await handleImageUpload();
     const productsData = { ...data, images: uploadedImages };
     console.log("upload ", productsData);
-    console.log("uploadedImages ", uploadedImages);
+    //console.log("uploadedImages ", uploadedImages);
+    const sendData = {
+      name: productsData.name,
+      desc: productsData.desc,
+      price: productsData.price,
+      brand: productsData.brand,
+      category: productsData.category,
+      inStock: productsData.inStock,
+      images: productsData.images,
+    };
+    axios
+      .post("/api/product", sendData)
+      .then((res) => {
+        toast.success("product created");
+        setIsProductCreated(true);
+        console.log(res);
+      })
+      .catch((err) => toast.error("product upload failed"))
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   return (

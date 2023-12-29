@@ -1,19 +1,29 @@
 import ProductDetails from "../../../components/Products/ProductDetails";
 import React from "react";
-import { products } from "../../../utils/products";
+
 import ListRating from "../../../components/Products/ListRating";
 
-const productDetailsPage = ({ params }) => {
-  const productId = params.pid;
-  console.log(productId);
-  const singleProduct = products.find((item) => item.id === productId);
+import getProductsById from "../../../../actions/getProductById";
+
+const productDetailsPage = async ({ params }) => {
+  const products = await getProductsById(params.pid);
+
+  if (!products) {
+    return (
+      <div className="flex justify-center mt-10">
+        <h3 className="font-semibold text-red-700 text-2xl">
+          No products found
+        </h3>
+      </div>
+    );
+  }
   return (
     <div className="p-8">
-      <ProductDetails product={singleProduct} />
+      <ProductDetails product={products} />
       <div className="flex flex-col mt-20 gap-4">
         <div>Add Rating</div>
         <div>
-          <ListRating products={singleProduct} />
+          <ListRating products={products} />
         </div>
       </div>
     </div>
