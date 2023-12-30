@@ -27,7 +27,7 @@ export default async function RootLayout({ children }) {
           {" "}
           <Toaster />
           <CartProvider>
-            <Navbar />
+            <Navbar currentUser={currentUser} />
             <main className="flex-grow">{children}</main>
             <Footer />
           </CartProvider>

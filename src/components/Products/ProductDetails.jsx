@@ -68,7 +68,7 @@ const ProductDetails = ({ product }) => {
   }, [cardProduct]);
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
       <div className="col-span-1">
         <ProductImage
           cardProduct={cardProduct}
@@ -83,7 +83,7 @@ const ProductDetails = ({ product }) => {
           <div>{product.reviews.length} reviews</div>
         </div>
         <Horizontal />
-        <div className="text-justify">{product.description}</div>
+        <div className="text-justify">{product.desc}</div>
         <Horizontal />
         <div>
           <span className="font-semibold">Category :</span> {product.category}

@@ -4,7 +4,7 @@ import React from "react";
 import NavCategoriesItesm from "./NavCategoriesItesm";
 import { usePathname, useSearchParams } from "next/navigation";
 
-const Categories = () => {
+const Categories = ({ open, setOpen, searchbarOpen }) => {
   const searchParams = useSearchParams();
   const category = searchParams?.get("category");
   const pathname = usePathname();
@@ -12,12 +12,20 @@ const Categories = () => {
   if (!homePage) {
     return null;
   }
-  console.log("category ", category);
+
   return (
-    <div className="bg-white">
-      <div className="lg:container lg:mx-auto mx-2 flex justify-between items-center overflow-x-auto">
+    <div className="bg-white z-50">
+      <div
+        className={`lg:container h-screen z-50 lg:h-fit lg:mx-2 lg:static absolute left-0 ${
+          !searchbarOpen ? "top-16" : "top-[112px]"
+        } lg:w-full ${
+          open ? "w-[220px]" : "w-0"
+        } flex transition-all duration-200 lg:flex-row flex-col lg:gap-0 gap-4 lg:justify-between  bg-white  lg:items-center items-start `}
+      >
         {categories.map((item) => (
           <NavCategoriesItesm
+            open={open}
+            setOpen={setOpen}
             label={item.label}
             icon={item.icon}
             selected={

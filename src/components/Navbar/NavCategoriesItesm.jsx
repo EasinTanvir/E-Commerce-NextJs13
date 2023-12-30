@@ -2,13 +2,14 @@ import React from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import qs from "query-string";
 
-const NavCategoriesItesm = ({ label, icon: Icon, selected }) => {
+const NavCategoriesItesm = ({ label, icon: Icon, selected, open, setOpen }) => {
   const router = useRouter();
   const params = useSearchParams();
   console.log("params ", params);
   const handlerClick = () => {
     if (label === "All") {
       router.push("/");
+      setOpen(false);
     } else {
       let currentQuery = {};
 
@@ -34,12 +35,15 @@ const NavCategoriesItesm = ({ label, icon: Icon, selected }) => {
 
       console.log("url ", url);
       router.push(url);
+      setOpen(false);
     }
   };
   return (
     <div
       onClick={handlerClick}
-      className={`flex items-center justify-center gap-1 p-2 border-b-2 hover:text-slate-800 transition cursor-pointer ${
+      className={`flex ${
+        !open ? "opacity-0 lg:opacity-100" : "opacity-100"
+      } items-center justify-center gap-1 p-2 border-b-2 hover:text-slate-800 transition cursor-pointer ${
         selected ? "border-b-slate-800" : " border-transparent"
       }`}
     >
