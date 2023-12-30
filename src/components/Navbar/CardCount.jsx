@@ -2,6 +2,7 @@
 import { useRouter } from "next/navigation";
 import { useCart } from "../../../hooks/useCart";
 import { CiShoppingCart } from "react-icons/ci";
+import { motion } from "framer-motion";
 const CardCount = () => {
   const router = useRouter();
   const { cartProduct, clearCart, cartTotalPrice, cartTotalQty } = useCart();
@@ -11,9 +12,9 @@ const CardCount = () => {
       className="relative cursor-pointer "
     >
       <div className="text-3xl">
-        <CiShoppingCart />
+        <CiShoppingCart className="text-white" />
       </div>
-      <span className="absolute top-[-10px] right-[-10px] text-white bg-teal-800 text-xs rounded-full w-6 h-6 flex justify-center items-center">
+      <span className="absolute top-[-10px] right-[-10px] text-red-800 bg-white text-xs rounded-full w-6 h-6 flex justify-center items-center">
         {cartTotalQty}
       </span>
     </div>

@@ -26,6 +26,18 @@ export const categories = [
     icon: MdTv,
   },
   {
+    label: "Tablet",
+    icon: MdTv,
+  },
+  {
+    label: "Monitor",
+    icon: MdTv,
+  },
+  {
+    label: "Camera",
+    icon: MdTv,
+  },
+  {
     label: "accessories",
     icon: MdOutlineKeyboard,
   },

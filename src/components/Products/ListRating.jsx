@@ -6,7 +6,7 @@ import { Rating } from "@mui/material";
 const ListRating = ({ products }) => {
   return (
     <div>
-      <Heading title="Peodut Reviews" center={false} />
+      <Heading title="Product Reviews" center={false} />
       <div className="mt-2 text-sm flex flex-col gap-2">
         {products?.reviews &&
           products.reviews.map((item) => (
