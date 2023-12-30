@@ -32,7 +32,10 @@ const ProductImage = ({ cardProduct, product, handleColorSet }) => {
           >
             {product.images.map((item) => (
               <SwiperSlide>
-                <img className="w-full rounded-lg shadow-md" src={item.image} />
+                <img
+                  className="w-full rounded-lg shadow-md max-h-96 object-cover"
+                  src={item.image}
+                />
               </SwiperSlide>
             ))}
           </Swiper>
@@ -50,7 +53,7 @@ const ProductImage = ({ cardProduct, product, handleColorSet }) => {
               {product.images.map((item) => (
                 <SwiperSlide>
                   <img
-                    className="w-full h-16 cursor-pointer hover:scale-105 transition saturate-200"
+                    className="w-full h-16 cursor-pointer hover:scale-105 transition  saturate-200"
                     src={item.image}
                   />
                 </SwiperSlide>

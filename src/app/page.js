@@ -1,18 +1,26 @@
 import HomeBanner from "../components/Banner/HomeBanner";
 
-import ProductCart from "../components/Products/ProductsCart";
-import getProducts from "../../actions/getProduct";
+import getProducts, {
+  getFeatureProducts,
+  getNewArrivalProducts,
+} from "../../actions/getProduct";
 import NotFound from "@/components/NotFound";
+import ProductHelper from "@/components/Products/ProductHelper";
 
 const page = async ({ params, searchParams }) => {
-  console.log(searchParams);
   const { category, searchTerm } = searchParams;
   const products = await getProducts({
     category,
     searchTerm,
   });
+  const featureProducts = await getFeatureProducts();
+  const newArrivalProducts = await getNewArrivalProducts();
 
-  if (products.length === 0) {
+  if (
+    products.length === 0 &&
+    featureProducts.length === 0 &&
+    newArrivalProducts.length === 0
+  ) {
     return (
       <>
         <NotFound />
@@ -30,18 +38,43 @@ const page = async ({ params, searchParams }) => {
   }
 
   const shuffleProduct = shuffleArray(products);
+
+  if (category || searchTerm) {
+    return (
+      <div className="text-center sm:px-2 relative">
+        <ProductHelper products={products} />
+      </div>
+    );
+  }
   return (
-    <div className="P-8 container mx-auto px-4 sm:px-0">
+    <div className="   ">
       {!category && !searchTerm && (
-        <div className="my-5 md:mx-10 mx-0">
+        <div className="my-5 md:mx-10 mx-0 md:px-6 px-2 py-4">
           <HomeBanner />
         </div>
       )}
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6  gap-8">
-        {products?.map((item) => (
-          <ProductCart data={item} key={item.id} />
-        ))}
+      <div className="text-center sm:px-2 relative">
+        <h1 className="mt-16 mb-6 md:text-4xl text-3xl font-semibold text-slate-900">
+          Featured Products
+        </h1>
+
+        <ProductHelper products={featureProducts} />
+      </div>
+
+      <div className="text-center px-2 relative">
+        <h1 className="mt-16 mb-6 md:text-4xl text-3xl  font-semibold text-slate-900">
+          New Arrivals
+        </h1>
+
+        <ProductHelper products={newArrivalProducts} />
+      </div>
+      <div className="text-center px-2 relative">
+        <h1 className="mt-16 mb-6 md:text-4xl text-3xl  font-semibold text-slate-900">
+          Premium Collections
+        </h1>
+
+        <ProductHelper products={products} />
       </div>
     </div>
   );

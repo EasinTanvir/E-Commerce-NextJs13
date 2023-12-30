@@ -46,3 +46,50 @@ export default async function getProducts(params) {
     throw new Error(err);
   }
 }
+
+export async function getFeatureProducts() {
+  try {
+    const products = await prisma.product.findMany({
+      where: {
+        type: "feature",
+      },
+      include: {
+        reviews: {
+          include: {
+            user: true,
+          },
+          orderBy: {
+            createdDate: "desc",
+          },
+        },
+      },
+    });
+
+    return products;
+  } catch (err) {
+    throw new Error(err);
+  }
+}
+export async function getNewArrivalProducts() {
+  try {
+    const products = await prisma.product.findMany({
+      where: {
+        type: "new",
+      },
+      include: {
+        reviews: {
+          include: {
+            user: true,
+          },
+          orderBy: {
+            createdDate: "desc",
+          },
+        },
+      },
+    });
+
+    return products;
+  } catch (err) {
+    throw new Error(err);
+  }
+}

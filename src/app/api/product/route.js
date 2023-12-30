@@ -8,7 +8,7 @@ export async function POST(req) {
     return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
   }
 
-  const { name, desc, price, brand, category, inStock, images, reviews } =
+  const { name, desc, price, brand, category, inStock, images, type } =
     await req.json();
   console.log(images);
   let newProduct;
@@ -17,8 +17,10 @@ export async function POST(req) {
       data: {
         name,
         desc,
+
         price: parseFloat(price),
         brand,
+        type,
         category,
         inStock,
         images,

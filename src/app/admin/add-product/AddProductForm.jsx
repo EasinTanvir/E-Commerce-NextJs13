@@ -38,6 +38,7 @@ const AddProductForm = () => {
       desc: "",
       price: "",
       brand: "",
+      type: "",
       category: "",
       inStock: false,
       image: [],
@@ -164,6 +165,7 @@ const AddProductForm = () => {
       desc: productsData.desc,
       price: productsData.price,
       brand: productsData.brand,
+      type: productsData.type,
       category: productsData.category,
       inStock: productsData.inStock,
       images: productsData.images,
@@ -205,6 +207,15 @@ const AddProductForm = () => {
       <Inputs
         id="brand"
         label="Brand"
+        disabled={isLoading}
+        register={register}
+        errors={errors}
+        required
+        type="text"
+      />{" "}
+      <Inputs
+        id="type"
+        label="Type"
         disabled={isLoading}
         register={register}
         errors={errors}

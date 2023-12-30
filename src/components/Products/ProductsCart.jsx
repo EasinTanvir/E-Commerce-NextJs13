@@ -19,16 +19,16 @@ const ProductCart = ({ data }) => {
       onClick={() => navigate.push(`/product/${data.id}`)}
       className="col-span-1 cursor-pointer border-[1.2px] border-slate-200 bg-slate-50 rounded-sm p-2 transition hover:scale-105 duration-300 text-center text-sm"
     >
-      <div className="flex flex-col items-center w-full gap-1">
-        <div className="aspect-square relative overflow-hidden w-full">
+      <div className="flex flex-col items-center w-full  gap-0">
+        <div className="aspect-square  relative overflow-hidden w-full h-48">
           <Image
             alt="banner"
             src={data.images[0].image}
-            fill
-            className="object-contain w-full h-full"
+            layout="fill"
+            objectFit="cover"
           />
         </div>
-        <div className="mt-4">{truncateText(data.name)}</div>
+        <div className="mt-3">{truncateText(data.name)}</div>
         <div>
           <Rating value={productRating} readOnly />
         </div>
