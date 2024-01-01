@@ -1,5 +1,7 @@
-import HomeBanner from "../components/Banner/HomeBanner";
+export const revalidate = 0;
 
+import HomeBanner from "../components/Banner/HomeBanner";
+import Link from "next/link";
 import getProducts, {
   getFeatureProducts,
   getNewArrivalProducts,
@@ -8,7 +10,6 @@ import NotFound from "@/components/NotFound";
 import ProductHelper from "@/components/Products/ProductHelper";
 
 const page = async ({ params, searchParams }) => {
-  console.log("fetching.........");
   const { category, searchTerm } = searchParams;
   const products = await getProducts({
     category,
@@ -23,7 +24,16 @@ const page = async ({ params, searchParams }) => {
   if (products.length === 0) {
     return (
       <>
-        <NotFound />
+        <div className="flex flex-col gap-2 justify-center items-center h-[600px]">
+          <h1 className="text-red-700 text-4xl font-semibold">
+            No Product Found
+          </h1>
+          <Link href="/">
+            <button className="bg-teal-700 text-white px-4 py-1 rounded-md">
+              Go Back
+            </button>
+          </Link>
+        </div>
       </>
     );
   }

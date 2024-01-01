@@ -98,44 +98,48 @@ const ProductDetails = ({ product }) => {
           {product.inStock ? "In Stock" : "Out of Stock"}
         </div>
         <Horizontal />
-        {isProductExist ? (
+        {product.inStock && (
           <>
-            <p className="mb-2 text-stone-500 flex items-center gap-1">
-              <IoMdCheckmarkCircle className="text-teal-400" size={20} />
-              <span>Product added to cart</span>
-            </p>
-            <Link href="/cart">
-              <button className="bg-teal-500 text-white border-none rounded-md py-2 px-5 hover:text-gray-300">
-                View Cart
-              </button>
-            </Link>
-          </>
-        ) : (
-          <>
-            {" "}
-            <div>
-              <SetColor
-                images={images}
-                handleColorSet={handleColorSet}
-                cardProduct={cardProduct}
-              />
-            </div>
-            <Horizontal />
-            <div>
-              <SetQuantity
-                cardProduct={cardProduct}
-                cardCounter={false}
-                handleQtyIncrease={handleQtyIncrease}
-                handleQtyDecrease={handleQtyDecrease}
-              />
-            </div>
-            <Horizontal />
-            <button
-              onClick={() => hadleAddProductCart(cardProduct)}
-              className="w-80 px-4 py-4 bg-gray-600 text-white rounded-md hover:text-gray-300"
-            >
-              Add To Cart
-            </button>
+            {isProductExist ? (
+              <>
+                <p className="mb-2 text-stone-500 flex items-center gap-1">
+                  <IoMdCheckmarkCircle className="text-teal-400" size={20} />
+                  <span>Product added to cart</span>
+                </p>
+                <Link href="/cart">
+                  <button className="bg-teal-500 text-white border-none rounded-md py-2 px-5 hover:text-gray-300">
+                    View Cart
+                  </button>
+                </Link>
+              </>
+            ) : (
+              <>
+                {" "}
+                <div>
+                  <SetColor
+                    images={images}
+                    handleColorSet={handleColorSet}
+                    cardProduct={cardProduct}
+                  />
+                </div>
+                <Horizontal />
+                <div>
+                  <SetQuantity
+                    cardProduct={cardProduct}
+                    cardCounter={false}
+                    handleQtyIncrease={handleQtyIncrease}
+                    handleQtyDecrease={handleQtyDecrease}
+                  />
+                </div>
+                <Horizontal />
+                <button
+                  onClick={() => hadleAddProductCart(cardProduct)}
+                  className="w-80 px-4 py-4 bg-gray-600 text-white rounded-md hover:text-gray-300"
+                >
+                  Add To Cart
+                </button>
+              </>
+            )}
           </>
         )}
       </div>

@@ -43,9 +43,11 @@ const UserMenu = ({ currentUser }) => {
             <Link href="/order">
               <MenuItem onClick={handleClose}>Your Orders</MenuItem>
             </Link>
-            <Link href="/admin">
-              <MenuItem onClick={handleClose}>Admins</MenuItem>
-            </Link>
+            {currentUser?.role === "ADMIN" && (
+              <Link href="/admin">
+                <MenuItem onClick={handleClose}>Admins</MenuItem>
+              </Link>
+            )}
             <MenuItem
               onClick={() => {
                 handleClose();
