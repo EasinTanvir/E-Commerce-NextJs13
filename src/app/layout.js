@@ -13,8 +13,8 @@ const poppins = Poppins({
 });
 
 export const metadata = {
-  title: "Ecommerce app",
-  description: "easintanvir",
+  title: "E-Shop",
+  description: "Best Shop on Town",
 };
 
 export default async function RootLayout({ children }) {

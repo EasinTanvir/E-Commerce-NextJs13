@@ -1,12 +1,13 @@
-import React from "react";
-import { MdError } from "react-icons/md";
+import Link from "next/link";
 const NotFound = () => {
   return (
-    <div className="h-[72vh] flex justify-center items-center">
-      <div className="flex flex-col w-fit items-center">
-        <h1 className="text-slate-800 text-4xl">No Products Found...</h1>
-        <MdError size={60} className="text-black" />
-      </div>
+    <div className="flex flex-col gap-2 justify-center items-center h-[600px]">
+      <h1 className="text-red-700 text-4xl font-semibold">Invalid Segment</h1>
+      <Link href="/">
+        <button className="bg-teal-700 text-white px-4 py-1 rounded-md">
+          Go Back
+        </button>
+      </Link>
     </div>
   );
 };

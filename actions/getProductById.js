@@ -1,4 +1,5 @@
 import { prisma } from "../libs/prismaConfig";
+import { notFound } from "next/navigation";
 export default async function getProductsById(id) {
   try {
     const product = await prisma.product.findUnique({
@@ -21,6 +22,6 @@ export default async function getProductsById(id) {
     }
     return product;
   } catch (err) {
-    console.log(err);
+    notFound();
   }
 }

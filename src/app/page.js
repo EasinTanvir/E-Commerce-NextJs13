@@ -8,6 +8,7 @@ import NotFound from "@/components/NotFound";
 import ProductHelper from "@/components/Products/ProductHelper";
 
 const page = async ({ params, searchParams }) => {
+  console.log("fetching.........");
   const { category, searchTerm } = searchParams;
   const products = await getProducts({
     category,
@@ -15,12 +16,11 @@ const page = async ({ params, searchParams }) => {
   });
   const featureProducts = await getFeatureProducts();
   const newArrivalProducts = await getNewArrivalProducts();
+  const premiumProducts = await getProducts({
+    category: null,
+  });
 
-  if (
-    products.length === 0 &&
-    featureProducts.length === 0 &&
-    newArrivalProducts.length === 0
-  ) {
+  if (products.length === 0) {
     return (
       <>
         <NotFound />
@@ -37,7 +37,7 @@ const page = async ({ params, searchParams }) => {
     }
   }
 
-  const shuffleProduct = shuffleArray(products);
+  const shuffleProduct = shuffleArray(premiumProducts);
 
   if (category || searchTerm) {
     return (
@@ -74,7 +74,7 @@ const page = async ({ params, searchParams }) => {
           Premium Collections
         </h1>
 
-        <ProductHelper products={products} />
+        <ProductHelper products={shuffleProduct} />
       </div>
     </div>
   );

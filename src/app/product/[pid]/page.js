@@ -1,11 +1,20 @@
 import ProductDetails from "../../../components/Products/ProductDetails";
 import React from "react";
-
+import Link from "next/link";
 import ListRating from "../../../components/Products/ListRating";
 
 import getProductsById from "../../../../actions/getProductById";
 import AddRating from "../AddRating/AddRating";
 import { getCurrentuser } from "../../../../getUser/currentUser";
+
+export async function generateMetadata({ params: { pid } }) {
+  const post = await getProductsById(pid);
+
+  return {
+    title: post.name,
+    description: post.desc,
+  };
+}
 
 const productDetailsPage = async ({ params }) => {
   const products = await getProductsById(params.pid);
@@ -13,10 +22,13 @@ const productDetailsPage = async ({ params }) => {
 
   if (!products) {
     return (
-      <div className="flex justify-center mt-10">
-        <h3 className="font-semibold text-red-700 text-2xl">
-          No products found
-        </h3>
+      <div className="flex h-[600px] flex-col gap-2 items-center justify-center mt-10">
+        <h1 className="text-red-700 text-4xl font-semibold">No Products</h1>
+        <Link href="/">
+          <button className="bg-teal-700 text-white px-4 py-1 rounded-md">
+            Go Back
+          </button>
+        </Link>
       </div>
     );
   }
