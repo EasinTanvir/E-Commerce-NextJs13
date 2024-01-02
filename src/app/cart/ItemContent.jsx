@@ -22,7 +22,9 @@ const ItemContent = ({ item }) => {
           </div>
         </Link>
         <div className="flex flex-col justify-between">
-          <Link href={`/product/${item.id}`}>{truncateText(item.name)}</Link>
+          <Link className="text-xs md:text-lg" href={`/product/${item.id}`}>
+            {truncateText(item.name)}
+          </Link>
           <div>{item.selectedImage.color}</div>
           <div className="w-[70px]">
             <button

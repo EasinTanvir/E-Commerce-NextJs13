@@ -6,7 +6,7 @@ const page = async () => {
   const currentUser = await getCurrentuser();
   return (
     <div className="mt-8">
-      <div className="container mx-auto">
+      <div className="px-3">
         <CartClient currentUser={currentUser} />
       </div>
     </div>

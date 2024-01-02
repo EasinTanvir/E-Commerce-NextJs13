@@ -1,13 +1,17 @@
-import React from "react";
+export const dynamic = "force-dynamic";
+
+import React, { Suspense } from "react";
+
 import getOrders from "../../../actions/getOrder";
 import MyOrder from "./MyOrder";
 import { getCurrentuser } from "../../../getUser/currentUser";
 import Link from "next/link";
-const page = async () => {
+import LoaderIcon from "@/components/LoaderIcon";
+
+const OrderHelper = async () => {
   const user = await getCurrentuser();
 
   const order = await getOrders(user.id);
-
   if (order.length === 0) {
     return (
       <>
@@ -25,9 +29,29 @@ const page = async () => {
     );
   }
 
+  return <MyOrder order={order} />;
+};
+
+const page = async () => {
   return (
-    <div>
-      <MyOrder order={order} />
+    <div className="p-8 ">
+      <div className="mb-6 text-center">
+        <h3 className="text-slate-800 text-2xl font-semibold">Manage Orders</h3>
+      </div>
+      <Suspense
+        fallback={
+          <div className="h-[300px] flex justify-center items-center">
+            <div className="max-w-[200px] flex flex-col gap-1">
+              <LoaderIcon />
+              <div className="text-xl text-slate-700 font-semibold">
+                Please Wait..........
+              </div>
+            </div>
+          </div>
+        }
+      >
+        <OrderHelper />
+      </Suspense>
     </div>
   );
 };

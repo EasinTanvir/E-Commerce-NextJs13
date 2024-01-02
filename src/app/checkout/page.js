@@ -4,7 +4,7 @@ import FormWrapp from "../../components/FormWrapp";
 
 const page = () => {
   return (
-    <div className="p-8">
+    <div className="md:p-8 px-2 py-4">
       <CheckOutClient />
     </div>
   );
