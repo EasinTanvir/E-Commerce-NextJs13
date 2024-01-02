@@ -15,29 +15,37 @@ const OrderHelper = async () => {
   if (order.length === 0) {
     return (
       <>
-        <div className="flex flex-col gap-2 justify-center items-center h-[600px]">
-          <h1 className="text-red-700 md:text-4xl text-md font-semibold">
+        <div className="flex flex-col gap-2 justify-center items-center h-[350px]">
+          <h1 className="text-teal-700 uppercase md:text-3xl text-md mb-4 font-semibold">
             You Don't have any order yet
           </h1>
           <Link href="/">
-            <button className="bg-teal-700 text-white px-4 py-1 rounded-md">
+            <button className="bg-rose-700 text-white px-4 py-2 rounded-md">
               Continue Shopping
             </button>
           </Link>
         </div>
       </>
     );
+  } else {
+    return (
+      <>
+        <>
+          <div className="mb-6 text-center">
+            <h3 className="text-slate-800 text-2xl font-semibold">
+              Manage Orders
+            </h3>
+          </div>
+        </>
+        <MyOrder order={order} />
+      </>
+    );
   }
-
-  return <MyOrder order={order} />;
 };
 
 const page = async () => {
   return (
     <div className="p-8 ">
-      <div className="mb-6 text-center">
-        <h3 className="text-slate-800 text-2xl font-semibold">Manage Orders</h3>
-      </div>
       <Suspense
         fallback={
           <div className="h-[300px] flex justify-center items-center">

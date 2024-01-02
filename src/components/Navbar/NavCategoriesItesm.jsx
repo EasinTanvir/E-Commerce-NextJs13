@@ -5,7 +5,7 @@ import qs from "query-string";
 const NavCategoriesItesm = ({ label, icon: Icon, selected, open, setOpen }) => {
   const router = useRouter();
   const params = useSearchParams();
-  console.log("params ", params);
+
   const handlerClick = () => {
     if (label === "All") {
       router.push("/");

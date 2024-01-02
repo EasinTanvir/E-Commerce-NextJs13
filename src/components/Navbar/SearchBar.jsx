@@ -27,8 +27,10 @@ const SearchBar = () => {
       },
       { skipNull: true }
     );
-    router.push(url);
-    reset();
+    if (url) {
+      router.push(url);
+      reset();
+    }
   };
   return (
     <div className="flex justify-center items-center md:static absolute top-16 left-0 w-full">
