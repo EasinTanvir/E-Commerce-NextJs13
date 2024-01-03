@@ -4,8 +4,9 @@ import "./globals.css";
 import Footer from "../components/Footer/Footer";
 import toast, { Toaster } from "react-hot-toast";
 import CartProvider from "../../provider/CartProvider";
-import { getCurrentuser } from "../../getUser/currentUser";
+
 import Navbar from "../components/Navbar/Navbar";
+import { AuthProvider } from "../../libs/SessionProvider";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -17,20 +18,20 @@ export const metadata = {
   description: "Best Shop on Town",
 };
 
-export default async function RootLayout({ children }) {
-  const currentUser = await getCurrentuser();
-
+export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${poppins.className} `}>
         <div className="flex flex-col min-h-screen">
           {" "}
           <Toaster />
-          <CartProvider>
-            <Navbar currentUser={currentUser} />
-            <main className="flex-grow">{children}</main>
-            <Footer />
-          </CartProvider>
+          <AuthProvider>
+            <CartProvider>
+              <Navbar />
+              <main className="flex-grow">{children}</main>
+              <Footer />
+            </CartProvider>
+          </AuthProvider>
         </div>
       </body>
     </html>

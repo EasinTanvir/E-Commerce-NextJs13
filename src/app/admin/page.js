@@ -1,4 +1,5 @@
-import React from "react";
+export const dynamic = "force-dynamic";
+
 import Summary from "./Summary/Summary";
 import getProducts from "../../../actions/getProduct";
 import getUser from "../../../actions/getUser";

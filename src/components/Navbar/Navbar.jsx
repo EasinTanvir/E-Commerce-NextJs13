@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Redressed } from "next/font/google";
 import CardCount from "./CardCount";
 import UserMenu from "./UserMenu";
-import { getCurrentuser } from "../../../getUser/currentUser";
+
 import Categories from "./Categories";
 import SearchBar from "./SearchBar";
 import { FaList } from "react-icons/fa";
@@ -11,9 +11,10 @@ import { useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import { FaSearch } from "react-icons/fa";
 import BackDrop from "./BackDrop";
+
 const redressed = Redressed({ subsets: ["latin"], weight: ["400"] });
 
-const Navbar = ({ currentUser }) => {
+const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [searchbarOpen, setSearchBarOpen] = useState(false);
   const onClickHanler = () => {
@@ -76,7 +77,7 @@ const Navbar = ({ currentUser }) => {
             </div>
 
             <div>
-              <UserMenu currentUser={currentUser} />
+              <UserMenu />
             </div>
           </div>
         </div>

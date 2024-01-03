@@ -6,11 +6,12 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import axios from "axios";
 import Link from "next/link";
 import { AiOutlineGoogle } from "react-icons/ai";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 
-const RegisterForm = ({ currentUser }) => {
+const RegisterForm = () => {
+  const { data: session, status } = useSession();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const {
@@ -49,13 +50,13 @@ const RegisterForm = ({ currentUser }) => {
   };
 
   useEffect(() => {
-    if (currentUser) {
+    if (status === "authenticated") {
       router.push("/");
       router.refresh();
     }
-  }, [currentUser]);
+  }, [status]);
 
-  if (currentUser) {
+  if (status === "authenticated") {
     return <p>Logged In Redirecting....</p>;
   }
   return (

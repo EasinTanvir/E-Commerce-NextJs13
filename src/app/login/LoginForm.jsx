@@ -10,7 +10,7 @@ import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 
-const LoginForm = ({ currentUser }) => {
+const LoginForm = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const {
@@ -40,16 +40,6 @@ const LoginForm = ({ currentUser }) => {
     });
   };
 
-  useEffect(() => {
-    if (currentUser) {
-      router.push("/");
-      router.refresh();
-    }
-  }, [currentUser]);
-
-  if (currentUser) {
-    return <p>Logged In Redirecting....</p>;
-  }
   return (
     <>
       <Heading title="Login Here" />

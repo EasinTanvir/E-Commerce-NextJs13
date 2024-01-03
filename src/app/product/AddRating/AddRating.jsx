@@ -1,15 +1,17 @@
 "use client";
-import { useRouter } from "next/navigation";
+
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import Rating from "@mui/material/Rating";
 import Inputs from "@/components/inputs/Inputs";
 import toast from "react-hot-toast";
 import axios from "axios";
+import { useSession } from "next-auth/react";
 
-const AddRating = ({ product, user }) => {
+const AddRating = ({ product }) => {
+  const { data: session, status } = useSession();
   const [loading, setLoading] = useState(false);
-  const router = useRouter();
+
   const {
     register,
 
@@ -39,7 +41,7 @@ const AddRating = ({ product, user }) => {
     }
     const sendData = {
       ...data,
-      userId: user.id,
+      userId: session?.user?.id,
       product,
     };
 
@@ -56,7 +58,7 @@ const AddRating = ({ product, user }) => {
   };
 
   const alreadyReviews = product?.reviews.find(
-    (item) => item.userId === user.id
+    (item) => item.userId === session?.user?.id
   );
 
   if (alreadyReviews?.id) {

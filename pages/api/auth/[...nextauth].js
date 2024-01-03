@@ -1,9 +1,7 @@
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import { PrismaAdapter } from "@auth/prisma-adapter";
-
 import CredentialsProvider from "next-auth/providers/credentials";
-
 import bcrypt from "bcryptjs";
 import { prisma } from "../../../libs/prismaConfig";
 
@@ -16,11 +14,6 @@ export const authOptions = {
     }),
     CredentialsProvider({
       name: "Credentials",
-
-      credentials: {
-        email: { label: "email", type: "text" },
-        password: { label: "Password", type: "password" },
-      },
 
       async authorize(credentials, req) {
         if (!credentials?.email || !credentials?.password) {
@@ -49,8 +42,23 @@ export const authOptions = {
       },
     }),
   ],
-  debug: process.env.NODE_ENV === "development",
-  pages: { signIn: "/login" },
+
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user.id;
+      }
+      return token;
+    },
+
+    async session({ session, token }) {
+      if (session?.user) {
+        session.user.id = token.id;
+      }
+      return session;
+    },
+  },
+
   session: {
     strategy: "jwt",
   },

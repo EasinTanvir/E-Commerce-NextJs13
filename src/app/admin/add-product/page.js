@@ -1,4 +1,4 @@
-import React from "react";
+export const dynamic = "force-dynamic";
 import FormWrapp from "../../../components/FormWrapp";
 import AddProductForm from "./AddProductForm";
 import { getCurrentuser } from "../../../../getUser/currentUser";

@@ -1,4 +1,4 @@
-import React from "react";
+export const dynamic = "force-dynamic";
 import ManageProduct from "./ManageProduct";
 import getProducts from "../../../../actions/getProduct";
 import { getCurrentuser } from "../../../../getUser/currentUser";

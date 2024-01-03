@@ -5,11 +5,11 @@ import Link from "next/link";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import BackDrop from "./BackDrop";
-import { getCurrentuser } from "../../../getUser/currentUser";
 
-const UserMenu = ({ currentUser }) => {
+const UserMenu = () => {
+  const { data: session, status } = useSession();
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -24,7 +24,7 @@ const UserMenu = ({ currentUser }) => {
         onClick={handleClick}
         className="border-[1px] border-slate-400 flex flex-row items-center gap-1 rounded-full cursor-pointer hover:shadow-md transition text-slate-700"
       >
-        <Avatar alt={currentUser?.name} src={currentUser?.image} />
+        <Avatar alt={session?.user?.name} src={session?.user?.image} />
       </div>
       <Menu
         sx={{ width: "400px" }}
@@ -37,17 +37,17 @@ const UserMenu = ({ currentUser }) => {
           sx: { width: 160 },
         }}
       >
-        {currentUser ? (
+        {status === "authenticated" ? (
           <>
             {" "}
             <Link href="/order">
               <MenuItem onClick={handleClose}>Your Orders</MenuItem>
             </Link>
-            {currentUser?.role === "ADMIN" && (
+            {/* {currentUser?.role === "ADMIN" && (
               <Link href="/admin">
                 <MenuItem onClick={handleClose}>Admins</MenuItem>
               </Link>
-            )}
+            )} */}
             <MenuItem
               onClick={() => {
                 handleClose();
