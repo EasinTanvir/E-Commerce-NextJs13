@@ -6,6 +6,7 @@ import ListRating from "../../../components/Products/ListRating";
 import getProductsById from "../../../../actions/getProductById";
 import AddRating from "../AddRating/AddRating";
 import { getCurrentuser } from "../../../../getUser/currentUser";
+import getProducts from "../../../../actions/getProduct";
 
 export async function generateMetadata({ params: { pid } }) {
   const post = await getProductsById(pid);
@@ -48,3 +49,11 @@ const productDetailsPage = async ({ params }) => {
 };
 
 export default productDetailsPage;
+
+export async function generateStaticParams() {
+  const posts = await getProducts({ category: null });
+
+  return posts?.map((post) => ({
+    pid: post.id,
+  }));
+}
