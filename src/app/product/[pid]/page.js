@@ -20,6 +20,7 @@ export async function generateMetadata({ params: { pid } }) {
 const productDetailsPage = async ({ params }) => {
   const products = await getProductsById(params.pid);
   const currentUser = await getCurrentuser();
+  console.log(currentUser);
 
   if (!products) {
     return (
@@ -34,12 +35,22 @@ const productDetailsPage = async ({ params }) => {
     );
   }
   return (
-    <div className="p-8">
+    <div className="md:p-8 px-2 py-4">
+      <div className="mb-4">
+        <Link href="/">
+          <button className="bg-teal-700 text-white px-4 py-1 rounded-md">
+            Go Back
+          </button>
+        </Link>
+      </div>
+
       <ProductDetails product={products} />
       <div className="flex flex-col mt-20 gap-4">
-        <div>
-          <AddRating product={products} user={currentUser} />
-        </div>
+        {currentUser && (
+          <div>
+            <AddRating product={products} user={currentUser} />
+          </div>
+        )}
         <div>
           <ListRating products={products} />
         </div>

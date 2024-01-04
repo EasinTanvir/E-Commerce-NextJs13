@@ -14,7 +14,7 @@ const Categories = ({ open, setOpen, searchbarOpen }) => {
   }
 
   return (
-    <div className="bg-white z-50">
+    <div className="bg-white ">
       <div
         className={`lg:container h-screen z-50 lg:h-fit lg:mx-2 lg:static absolute left-0 ${
           !searchbarOpen ? "top-16" : "top-[112px]"

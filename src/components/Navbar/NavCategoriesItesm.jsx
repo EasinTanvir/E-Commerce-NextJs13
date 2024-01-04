@@ -42,7 +42,7 @@ const NavCategoriesItesm = ({ label, icon: Icon, selected, open, setOpen }) => {
     <div
       onClick={handlerClick}
       className={`flex ${
-        !open ? "opacity-0 lg:opacity-100" : "opacity-100"
+        !open ? "opacity-0 lg:opacity-100" : "opacity-100 z-50"
       } items-center justify-center gap-1 p-2 border-b-2 hover:text-slate-800 transition cursor-pointer ${
         selected ? "border-b-slate-800" : " border-transparent"
       }`}

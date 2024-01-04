@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { Redressed } from "next/font/google";
+import { usePathname } from "next/navigation";
 import CardCount from "./CardCount";
 import UserMenu from "./UserMenu";
 import { getCurrentuser } from "../../../getUser/currentUser";
@@ -14,6 +15,8 @@ import BackDrop from "./BackDrop";
 const redressed = Redressed({ subsets: ["latin"], weight: ["400"] });
 
 const Navbar = ({ currentUser }) => {
+  const path = usePathname();
+  console.log(path);
   const [open, setOpen] = useState(false);
   const [searchbarOpen, setSearchBarOpen] = useState(false);
   const onClickHanler = () => {
@@ -28,7 +31,7 @@ const Navbar = ({ currentUser }) => {
       <div className="container mx-auto px-4 sm:px-0 lg:py-4 z-40  py-3 ">
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-4">
-            <div className="lg:hidden block">
+            <div className={`lg:hidden  ${path === "/" ? "block" : "hidden"}`}>
               {open ? (
                 <IoMdClose
                   onClick={onClickHanler}
