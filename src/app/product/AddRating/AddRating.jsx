@@ -1,15 +1,25 @@
 "use client";
+import { useFormState, useFormStatus } from "react-dom";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Rating from "@mui/material/Rating";
 import Inputs from "@/components/inputs/Inputs";
 import toast from "react-hot-toast";
 import axios from "axios";
+import { addCommentWithServerAction } from "../../../../serveraction";
+import SuvmitButton from "./SuvmitButton";
 
 const AddRating = ({ product, user }) => {
+  const [state, actions] = useFormState(addCommentWithServerAction, {
+    message: null,
+  });
+
+  console.log(state?.message);
+
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+
   const {
     register,
 
@@ -17,14 +27,16 @@ const AddRating = ({ product, user }) => {
     setValue,
     reset,
 
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm({
     defaultValues: {
       comment: "",
+      productId: product.id,
       rating: 1,
     },
   });
 
+  console.log(isSubmitting);
   const setCustomvalue = (id, value) => {
     setValue(id, value, {
       shouldTouch: true,
@@ -32,29 +44,12 @@ const AddRating = ({ product, user }) => {
       shouldValidate: true,
     });
   };
-  const onSubmitHandler = async (data) => {
-    setLoading(true);
-    if (data.rating === 0) {
-      return toast.error("No Rating SElected");
-    }
-    const sendData = {
-      ...data,
-      userId: user.id,
-      product,
-    };
 
-    try {
-      await axios.post("/api/rating", sendData);
-      toast.success("Rating added successfull");
-    } catch (err) {
-      console.log(err);
-      return toast.error(err.response.data.mesage);
-    } finally {
-      reset();
-      setLoading(false);
+  useEffect(() => {
+    if (state?.message) {
+      toast.error(state?.message);
     }
-  };
-
+  }, [state]);
   const alreadyReviews = product?.reviews.find(
     (item) => item.userId === user.id
   );
@@ -64,7 +59,10 @@ const AddRating = ({ product, user }) => {
   }
 
   return (
-    <div className={"flex flex-col gap-2 max-w-[500px] "}>
+    <form
+      action={handleSubmit(actions)}
+      className={"flex flex-col gap-2 max-w-[500px] "}
+    >
       <div className="my-2">
         <h3 className="text-slate-800 text-2xl font-semibold">
           Rate This product
@@ -73,6 +71,12 @@ const AddRating = ({ product, user }) => {
       <div>
         <Rating
           onChange={(event, newValue) => setCustomvalue("rating", newValue)}
+        />
+        <input
+          type="text"
+          id="productId"
+          className="hidden"
+          {...register("productId")}
         />
         <Inputs
           id="comment"
@@ -83,14 +87,8 @@ const AddRating = ({ product, user }) => {
           required
         />
       </div>
-      <button
-        disabled={loading}
-        onClick={handleSubmit(onSubmitHandler)}
-        className="bg-teal-600 text-white ps-6 py-2 rounded-md "
-      >
-        {loading ? "Loading..." : "Submit"}
-      </button>
-    </div>
+      <SuvmitButton />
+    </form>
   );
 };
 
