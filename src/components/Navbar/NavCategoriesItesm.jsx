@@ -1,40 +1,20 @@
 import React from "react";
-import { useRouter, useSearchParams } from "next/navigation";
-import qs from "query-string";
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
 
 const NavCategoriesItesm = ({ label, icon: Icon, selected, open, setOpen }) => {
   const router = useRouter();
-  const params = useSearchParams();
+  const searchParams = useSearchParams();
+  const path = usePathname();
 
   const handlerClick = () => {
     if (label === "All") {
       router.push("/");
       setOpen(false);
     } else {
-      let currentQuery = {};
+      const params = new URLSearchParams(searchParams);
+      params.set("category", label);
 
-      if (params) {
-        currentQuery = qs.parse(params.toString());
-
-        console.log("currentQuery ", currentQuery);
-      }
-      let updatedQuery = {
-        ...currentQuery,
-        category: label,
-      };
-      console.log("updatedQuery ", updatedQuery);
-      const url = qs.stringifyUrl(
-        {
-          url: "/",
-          query: updatedQuery,
-        },
-        {
-          skipNull: null,
-        }
-      );
-
-      console.log("url ", url);
-      router.push(url);
+      router.push(`${path}?${params}`);
       setOpen(false);
     }
   };

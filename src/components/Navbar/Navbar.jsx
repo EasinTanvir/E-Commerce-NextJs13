@@ -55,25 +55,27 @@ const Navbar = ({ currentUser }) => {
           </div>
 
           <div className={`${!searchbarOpen ? "lg:block hidden" : "block"}`}>
-            <SearchBar />
+            {path === "/" && <SearchBar />}
           </div>
 
           <div className="flex items-center gap-6 lg:gap-12">
-            <div className=" block lg:hidden ">
-              {searchbarOpen ? (
-                <IoMdClose
-                  onClick={onSearchHandler}
-                  size={28}
-                  className="text-white cursor-pointer font-bold"
-                />
-              ) : (
-                <FaSearch
-                  onClick={onSearchHandler}
-                  size={22}
-                  className="text-white cursor-pointer"
-                />
-              )}
-            </div>
+            {path === "/" && (
+              <div className=" block lg:hidden ">
+                {searchbarOpen ? (
+                  <IoMdClose
+                    onClick={onSearchHandler}
+                    size={28}
+                    className="text-white cursor-pointer font-bold"
+                  />
+                ) : (
+                  <FaSearch
+                    onClick={onSearchHandler}
+                    size={22}
+                    className="text-white cursor-pointer"
+                  />
+                )}
+              </div>
+            )}
             <div>
               <CardCount />
             </div>

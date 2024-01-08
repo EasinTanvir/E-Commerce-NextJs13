@@ -15,10 +15,12 @@ const SearchBar = () => {
 
     params.set("searchTerm", data);
     router.push(`${pathname}?${params}`);
+    setData("");
   };
   return (
     <div className="flex justify-center items-center md:static absolute top-16 left-0 w-full">
       <input
+        value={data}
         onChange={(e) => setData(e.target.value)}
         required
         placeholder="Search here"
