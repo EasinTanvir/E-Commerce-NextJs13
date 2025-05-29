@@ -36,7 +36,7 @@ const productDetailsPage = async ({ params }) => {
     );
   }
   return (
-    <Main className="py-4 mx-auto">
+    <Main className="py-4 mx-auto min-h-screen">
       <div className="mb-4">
         <Link href="/">
           <button className="bg-teal-700 text-white px-4 py-1 rounded-md">

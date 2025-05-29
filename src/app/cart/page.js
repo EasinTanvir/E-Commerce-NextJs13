@@ -6,7 +6,7 @@ import Main from "@/components/Main";
 const page = async () => {
   const currentUser = await getCurrentuser();
   return (
-    <Main className="mt-8 mx-auto">
+    <Main className="mt-8 mx-auto min-h-screen">
       <div className="px-3">
         <CartClient currentUser={currentUser} />
       </div>
