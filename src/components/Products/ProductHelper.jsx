@@ -1,13 +1,9 @@
 "use client";
-import React, { useRef, useState } from "react";
-// Import Swiper React components
+import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
-// Import Swiper styles
 import "swiper/css";
-
 import "swiper/css/navigation";
-
 import ProductCart from "./ProductsCart";
 
 const ProductHelper = ({ products }) => {
@@ -46,8 +42,8 @@ const ProductHelper = ({ products }) => {
         navigation
         modules={[Navigation]}
       >
-        {products?.map((item) => (
-          <SwiperSlide>
+        {products?.map((item, i) => (
+          <SwiperSlide key={i}>
             <ProductCart data={item} key={item.id} />
           </SwiperSlide>
         ))}

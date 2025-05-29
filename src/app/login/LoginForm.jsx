@@ -1,9 +1,9 @@
 "use client";
-"use client";
+
 import Heading from "../../components/Heading";
 import Inputs from "../../components/inputs/Inputs";
 import React, { useEffect, useState } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import Link from "next/link";
 import { AiOutlineGoogle } from "react-icons/ai";
 import { signIn } from "next-auth/react";
@@ -13,6 +13,7 @@ import toast from "react-hot-toast";
 const LoginForm = ({ currentUser }) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -45,59 +46,77 @@ const LoginForm = ({ currentUser }) => {
       router.push("/");
       router.refresh();
     }
-  }, [currentUser]);
+  }, [currentUser, router]);
 
   if (currentUser) {
-    return <p>Logged In Redirecting....</p>;
+    return <p className="text-center py-10">Logged In Redirecting....</p>;
   }
+
   return (
-    <>
-      <Heading title="Login Here" />
-      <hr className="bg-slate-300 w-full h-px" />
-      <div className="w-full">
+    <div className="min-h-[calc(100vh-64px)] flex justify-center items-center px-4">
+      <form
+        onSubmit={handleSubmit(onSubmithandler)}
+        className="sm:w-[470px] w-full max-w-md shadow-lg py-8 px-6 bg-white rounded-md"
+      >
+        <Heading title="Login Here" center />
+
+        <p className="text-slate-600 text-center mb-6">
+          Enter your credentials to login to your account
+        </p>
+
         <button
+          type="button"
           onClick={() => signIn("google")}
-          className="bg-teal-950 w-full flex items-center gap-2 justify-center text-white py-3 rounded-md "
+          className="flex items-center justify-center gap-3 w-full bg-teal-950 text-white py-3 rounded-md mb-6 hover:bg-teal-800 transition duration-300"
         >
-          <span>Continue with google</span>
-          <AiOutlineGoogle />
+          <AiOutlineGoogle size={24} />
+          <span className="font-semibold text-base">Continue with Google</span>
         </button>
-      </div>
-      <Inputs
-        id="email"
-        label="Email"
-        disabled={isLoading}
-        register={register}
-        errors={errors}
-        required
-        type="email"
-      />
-      <Inputs
-        id="password"
-        label="Password"
-        disabled={isLoading}
-        register={register}
-        errors={errors}
-        required
-        type="password"
-      />
-      <div className=" w-full">
+
+        <div className="space-y-3">
+          <Inputs
+            id="email"
+            label="Email"
+            disabled={isLoading}
+            register={register}
+            errors={errors}
+            required
+            type="email"
+            placeholder="Type your email"
+            className="mb-4"
+          />
+
+          <Inputs
+            id="password"
+            label="Password"
+            disabled={isLoading}
+            register={register}
+            errors={errors}
+            required
+            type="password"
+            placeholder="Type your password"
+            className="mb-6"
+          />
+        </div>
         <button
-          onClick={handleSubmit(onSubmithandler)}
-          className="bg-red-700 py-2 px-4 rounded-md border-none text-white font-semibold hover:text-gray-400 hover:scale-105 transition duration-200 "
+          type="submit"
+          disabled={isLoading}
+          className="w-full bg-rose-600 mt-3 hover:bg-rose-700 text-white py-3 rounded-md font-semibold transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          {isLoading ? "Loading" : "Login"}
+          {isLoading ? "Loading..." : "Login"}
         </button>
-      </div>
-      <div className="w-full">
-        <p className="text-sm text-slate-600">
-          Don't have an account?
-          <Link className="underline font-semibold" href="/register">
+
+        <p className="text-center text-sm text-slate-700 mt-5">
+          Don't have an account?{" "}
+          <Link
+            href="/register"
+            className="font-semibold underline hover:text-rose-600"
+          >
             Register
           </Link>
         </p>
-      </div>
-    </>
+      </form>
+    </div>
   );
 };
 

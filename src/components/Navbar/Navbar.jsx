@@ -12,6 +12,7 @@ import { useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import { FaSearch } from "react-icons/fa";
 import BackDrop from "./BackDrop";
+import Main from "../Main";
 const redressed = Redressed({ subsets: ["latin"], weight: ["400"] });
 
 const Navbar = ({ currentUser }) => {
@@ -27,8 +28,8 @@ const Navbar = ({ currentUser }) => {
     setSearchBarOpen(!searchbarOpen);
   };
   return (
-    <div className="w-full sticky top-0 shadow-sm bg-nav z-40 ">
-      <div className="container mx-auto px-4 sm:px-0 lg:py-4 z-40  py-3 ">
+    <div className="w-full sticky top-0 shadow-sm bg-nav z-40">
+      <Main className="mx-auto px-4 sm:px-0  z-40   !py-4">
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-4">
             <div className={`lg:hidden  ${path === "/" ? "block" : "hidden"}`}>
@@ -50,7 +51,7 @@ const Navbar = ({ currentUser }) => {
               className={`${redressed.className} text-2xl text-white font-mono font-bold`}
               href="/"
             >
-              E-Logos
+              E-Shop
             </Link>
           </div>
 
@@ -85,7 +86,7 @@ const Navbar = ({ currentUser }) => {
             </div>
           </div>
         </div>
-      </div>
+      </Main>
       <Categories open={open} setOpen={setOpen} searchbarOpen={searchbarOpen} />
       {open && <BackDrop data={true} />}
     </div>

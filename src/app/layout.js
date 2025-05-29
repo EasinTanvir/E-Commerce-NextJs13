@@ -24,11 +24,10 @@ export default async function RootLayout({ children }) {
     <html lang="en">
       <body className={`${poppins.className} `}>
         <div className="flex flex-col min-h-screen">
-          {" "}
           <Toaster />
           <CartProvider>
             <Navbar currentUser={currentUser} />
-            <main className="flex-grow">{children}</main>
+            <main className="flex-grow pt-5 pb-20">{children}</main>
             <Footer />
           </CartProvider>
         </div>

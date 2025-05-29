@@ -7,6 +7,7 @@ import getProductsById from "../../../../actions/getProductById";
 import AddRating from "../AddRating/AddRating";
 import { getCurrentuser } from "../../../../getUser/currentUser";
 import getProducts from "../../../../actions/getProduct";
+import Main from "@/components/Main";
 
 export async function generateMetadata({ params: { pid } }) {
   const post = await getProductsById(pid);
@@ -35,7 +36,7 @@ const productDetailsPage = async ({ params }) => {
     );
   }
   return (
-    <div className="md:p-8 px-2 py-4">
+    <Main className="py-4 mx-auto">
       <div className="mb-4">
         <Link href="/">
           <button className="bg-teal-700 text-white px-4 py-1 rounded-md">
@@ -55,7 +56,7 @@ const productDetailsPage = async ({ params }) => {
           <ListRating products={products} />
         </div>
       </div>
-    </div>
+    </Main>
   );
 };
 

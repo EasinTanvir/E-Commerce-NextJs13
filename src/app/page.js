@@ -1,5 +1,5 @@
 export const revalidate = 0;
-
+import { Lobster } from "next/font/google";
 import HomeBanner from "../components/Banner/HomeBanner";
 import Link from "next/link";
 import getProducts, {
@@ -8,6 +8,13 @@ import getProducts, {
 } from "../../actions/getProduct";
 import NotFound from "@/components/NotFound";
 import ProductHelper from "@/components/Products/ProductHelper";
+import Main from "@/components/Main";
+
+export const lobster = Lobster({
+  weight: ["400"],
+  style: ["normal"],
+  subsets: ["latin", "cyrillic", "cyrillic-ext", "latin-ext"],
+});
 
 const page = async ({ params, searchParams }) => {
   const { category, searchTerm } = searchParams;
@@ -57,15 +64,17 @@ const page = async ({ params, searchParams }) => {
     );
   }
   return (
-    <div className="   ">
+    <Main className="mx-auto">
       {!category && !searchTerm && (
-        <div className="my-5 md:mx-10 mx-0 md:px-6 px-2 py-4">
+        <div className="py-5">
           <HomeBanner />
         </div>
       )}
 
       <div className="text-center sm:px-2 relative">
-        <h1 className="mt-16 mb-6 md:text-4xl text-3xl font-semibold text-slate-900">
+        <h1
+          className={`mt-16 mb-6 md:text-5xl text-3xl font-semibold text-slate-900 ${lobster.className}`}
+        >
           Featured Products
         </h1>
 
@@ -73,20 +82,24 @@ const page = async ({ params, searchParams }) => {
       </div>
 
       <div className="text-center px-2 relative">
-        <h1 className="mt-16 mb-6 md:text-4xl text-3xl  font-semibold text-slate-900">
+        <h1
+          className={`mt-16 mb-6 md:text-5xl text-3xl font-semibold text-slate-900 ${lobster.className}`}
+        >
           New Arrivals
         </h1>
 
         <ProductHelper products={newArrivalProducts} />
       </div>
       <div className="text-center px-2 relative">
-        <h1 className="mt-16 mb-6 md:text-4xl text-3xl  font-semibold text-slate-900">
+        <h1
+          className={`mt-16 mb-6 md:text-5xl text-3xl font-semibold text-slate-900 ${lobster.className}`}
+        >
           Premium Collections
         </h1>
 
         <ProductHelper products={shuffleProduct} />
       </div>
-    </div>
+    </Main>
   );
 };
 
