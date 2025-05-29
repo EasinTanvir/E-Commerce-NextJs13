@@ -1,12 +1,13 @@
 export const dynamic = "force-static";
 import CheckOutClient from "./CheckOutClient";
 import FormWrapp from "../../components/FormWrapp";
+import Main from "@/components/Main";
 
 const page = () => {
   return (
-    <div className="md:p-8 px-2 py-4 min-h-screen">
+    <Main className="mx-auto px-2 py-4 min-h-screen">
       <CheckOutClient />
-    </div>
+    </Main>
   );
 };
 

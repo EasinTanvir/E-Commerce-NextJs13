@@ -6,7 +6,6 @@ import getProducts, {
   getFeatureProducts,
   getNewArrivalProducts,
 } from "../../actions/getProduct";
-
 import ProductHelper from "@/components/Products/ProductHelper";
 import Main from "@/components/Main";
 
