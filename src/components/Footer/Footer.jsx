@@ -7,7 +7,7 @@ import Main from "../Main";
 
 const Footer = () => {
   return (
-    <footer className="bg-nav text-slate-200 text-sm py-10 ">
+    <footer className="bg-nav text-slate-200 text-sm py-16 ">
       <Main className="mx-auto ">
         <div className="flex flex-col md:flex-row md:justify-between justify-center  md:items-start items-center gap-8 md:gap-0 ">
           {/* Categories */}

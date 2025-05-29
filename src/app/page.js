@@ -6,7 +6,7 @@ import getProducts, {
   getFeatureProducts,
   getNewArrivalProducts,
 } from "../../actions/getProduct";
-import NotFound from "@/components/NotFound";
+
 import ProductHelper from "@/components/Products/ProductHelper";
 import Main from "@/components/Main";
 

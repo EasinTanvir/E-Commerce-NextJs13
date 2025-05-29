@@ -29,7 +29,7 @@ const Navbar = ({ currentUser }) => {
   };
   return (
     <div className="w-full sticky top-0 shadow-sm bg-nav z-40">
-      <Main className="mx-auto px-4 sm:px-0  z-40   !py-4">
+      <Main className="mx-auto px-4 sm:px-0  z-40   !py-4 ">
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-4">
             <div className={`lg:hidden  ${path === "/" ? "block" : "hidden"}`}>
