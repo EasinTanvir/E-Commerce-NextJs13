@@ -56,7 +56,9 @@ const SearchBar = () => {
       <button
         onClick={onSearchHandler}
         disabled={isLoading || isPending}
-        className={`bg-teal-500 text-white md:rounded-r-md rounded-none px-6 md:py-2 py-3 `}
+        className={` ${
+          isLoading ? "bg-rose-600" : "bg-teal-500"
+        } text-white md:rounded-r-md rounded-none px-6 md:py-2 py-3 `}
       >
         {isLoading || isPending ? "Loading..." : "Search"}
       </button>
