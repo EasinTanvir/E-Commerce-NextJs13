@@ -14,7 +14,7 @@ const poppins = Poppins({
 
 export const metadata = {
   title: "E-Shop",
-  description: "Best Shop on Town",
+  description: "Store for quality products and great deals",
 };
 
 export default async function RootLayout({ children }) {
