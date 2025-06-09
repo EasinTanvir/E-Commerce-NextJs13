@@ -61,11 +61,3 @@ const productDetailsPage = async ({ params }) => {
 };
 
 export default productDetailsPage;
-
-export async function generateStaticParams() {
-  const posts = await getProducts({ category: null });
-
-  return posts?.map((post) => ({
-    pid: post.id,
-  }));
-}

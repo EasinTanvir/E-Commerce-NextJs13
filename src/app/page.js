@@ -1,4 +1,5 @@
-export const revalidate = 0;
+export const dynamic = "force-dynamic";
+
 import { Lobster } from "next/font/google";
 import HomeBanner from "../components/Banner/HomeBanner";
 import Link from "next/link";

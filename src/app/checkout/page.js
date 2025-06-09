@@ -1,6 +1,5 @@
-export const dynamic = "force-static";
 import CheckOutClient from "./CheckOutClient";
-import FormWrapp from "../../components/FormWrapp";
+
 import Main from "@/components/Main";
 
 const page = () => {
