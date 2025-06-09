@@ -34,6 +34,7 @@ const HomeBanner = () => {
         <SwiperSlide>
           <div className="image-banner rounded-md relative">
             <Image
+              priority
               sizes="(max-width: 1024px) 100vw, 1420px"
               alt="banner"
               fill
@@ -65,7 +66,7 @@ const HomeBanner = () => {
           </div>
         </SwiperSlide>
         <SwiperSlide>
-          <div className="image-banner rounded-md">
+          <div className="image-banner rounded-md relative">
             <Image
               sizes="(max-width: 1024px) 100vw, 1420px"
               fill

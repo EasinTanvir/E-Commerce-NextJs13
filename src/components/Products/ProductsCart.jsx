@@ -22,9 +22,10 @@ const ProductCart = ({ data }) => {
         <Image
           alt={data.name}
           src={data.images[0].image}
-          layout="fill"
-          objectFit="cover"
-          className="transition-transform duration-300 hover:scale-110"
+          fill
+          sizes="(max-width: 1024px) 400px, 100vw"
+          className="transition-transform duration-300 hover:scale-110 object-cover"
+          priority
         />
       </div>
 

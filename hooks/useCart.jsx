@@ -9,17 +9,19 @@ export const CardContextProvider = ({ children }) => {
   const [paymentIntent, setPaymentIntent] = useState(null);
 
   useEffect(() => {
-    const cartItems = localStorage.getItem("cartData")
-      ? JSON.parse(localStorage.getItem("cartData"))
-      : null;
+    if (typeof window !== undefined) {
+      const cartItems = localStorage.getItem("cartData")
+        ? JSON.parse(localStorage.getItem("cartData"))
+        : null;
 
-    const payment = localStorage.getItem("paymentIntent")
-      ? JSON.parse(localStorage.getItem("paymentIntent"))
-      : null;
+      const payment = localStorage.getItem("paymentIntent")
+        ? JSON.parse(localStorage.getItem("paymentIntent"))
+        : null;
 
-    setPaymentIntent(payment);
+      setPaymentIntent(payment);
 
-    setCartProduct(cartItems);
+      setCartProduct(cartItems);
+    }
   }, []);
 
   useEffect(() => {
