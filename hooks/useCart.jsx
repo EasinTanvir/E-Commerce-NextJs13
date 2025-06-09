@@ -42,9 +42,6 @@ export const CardContextProvider = ({ children }) => {
 
     getPrice();
   }, [cartProduct]);
-  console.log(cartTotalPrice);
-  console.log(cartTotalQty);
-  console.log(cartProduct);
 
   const hadleAddProductCart = useCallback(
     (product) => {

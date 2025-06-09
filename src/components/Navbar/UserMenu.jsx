@@ -1,13 +1,11 @@
 "use client";
 import Avatar from "@mui/material/Avatar";
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
-import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { signOut } from "next-auth/react";
 import BackDrop from "./BackDrop";
-import { getCurrentuser } from "../../../getUser/currentUser";
 
 const UserMenu = ({ currentUser }) => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -38,7 +36,7 @@ const UserMenu = ({ currentUser }) => {
         }}
       >
         {currentUser ? (
-          <>
+          <div>
             {" "}
             <Link href="/order">
               <MenuItem onClick={handleClose}>Your Orders</MenuItem>
@@ -56,16 +54,16 @@ const UserMenu = ({ currentUser }) => {
             >
               SignOut
             </MenuItem>
-          </>
+          </div>
         ) : (
-          <>
+          <div>
             <Link href="/login">
               <MenuItem onClick={handleClose}>Login</MenuItem>
             </Link>
             <Link href="/register">
               <MenuItem onClick={handleClose}>Register</MenuItem>
             </Link>
-          </>
+          </div>
         )}
       </Menu>
       {open && <BackDrop />}
